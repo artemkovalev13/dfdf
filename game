@@ -1,0 +1,48 @@
+def play_morskoi_boi
+pole = Array.new(5){Array.new(5,"◯")}
+def print_pole(pole)
+pole.each do |x|
+puts x.map {|p| p }.join(" ")
+end
+end
+puts "Игра называется Морской бой. Правила довольно просты - Вам нужно отыскать загаданный программой корабль и уничтожить его."
+puts "Выбери количество попыток, которые тебе необходимы: "
+popitki = gets.chomp.to_i
+while popitki > 10 do
+puts "Максимальное число попыток - 10. Выберите любое другое число из доступных:"
+popitki = gets.chomp.to_i
+end
+print_pole(pole)
+def random_row(pole)
+return rand(5)
+end
+def random_col(pole)
+return rand(5)
+end
+row = random_row(pole)
+col = random_col(pole)
+for popitochka in 1..popitki
+puts "Попытка: #{popitochka}"
+puts "Выбери значение по вертикали: "
+nu_row = gets.chomp.to_i
+puts "Выбери значение по горизонтали: "
+nu_col = gets.chomp.to_i
+if popitochka = popitki
+puts "К сожалению, ты не обнаружил вражеский корабль. Он был спрятан в месте с координатами: #{row},#{col}"
+break
+elsif (nu_row == row) && (nu_col == col)
+puts "Поздравляю! Ты уничтожил вражеский корабль!"
+break
+else
+if (nu_row < 0) || (nu_row > 5) || (nu_col < 0) || (nu_col > 5)
+puts "Выбери другие координаты. Эти выходят за пределы поля."
+elsif(pole[nu_row][nu_col]) == "✪"
+puts "Попробуй поискать в другом месте."
+else 
+puts "К сожалению, корабль не был обнаружен"
+pole [nu_row][nu_col] = "✪"
+end
+end
+print_pole(pole)
+end
+end
